@@ -38,20 +38,20 @@ export class Vehicle {
 
     public copyWith(partial: Partial<VehicleInterface>): Vehicle {
         return new Vehicle({
-            id: partial.id || '',
-            licensePlate: partial.licensePlate || '',
-            userId: partial.userId || '',
-            brand: partial.brand || '',
-            model: partial.model || '',
-            picture: partial.picture || '',
-            vehicleType: partial.vehicleType || VehicleType.MOTO,
-            motor: partial.motor || MotorType.PETROL,
-            mileage: partial.mileage || 0,
-            year: partial.year || 1990,
-            cubicCentimeters: partial.cubicCentimeters || 0,
-            state: partial.state || VehicleState.ACTIVATE,
-            createdAt: partial.createdAt || null,
-            updatedAt: partial.updatedAt || null,
+            id: partial.id || this.id,
+            licensePlate: partial.licensePlate || this.licensePlate,
+            userId: partial.userId || this.userId,
+            brand: partial.brand || this.brand,
+            model: partial.model || this.model,
+            picture: partial.picture || this.picture,
+            vehicleType: partial.vehicleType || this.vehicleType,
+            motor: partial.motor || this.motor,
+            mileage: partial.mileage || this.mileage,
+            year: partial.year || this.year,
+            cubicCentimeters: partial.cubicCentimeters || this.cubicCentimeters,
+            state: partial.state || this.state,
+            createdAt: partial.createdAt || this.createdAt,
+            updatedAt: partial.updatedAt || this.updatedAt,
         });
     }
 
