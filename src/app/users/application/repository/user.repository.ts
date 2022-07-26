@@ -14,4 +14,16 @@ export class UserRepository {
         return newUser.toJSON();
     }
 
+    static async listUsers(): Promise<UserInterface[]> {
+        const data = await UserModel.find();
+
+        return data.map<UserInterface>(user => new User(user.toJSON() as any));
+    }
+
+    static async retrieveUserById(userId: string) {
+        const data = await UserModel.findById( userId );
+
+        return data?.toJSON();
+    }
+
 }

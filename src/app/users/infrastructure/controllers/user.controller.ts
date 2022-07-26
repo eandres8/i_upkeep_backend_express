@@ -1,12 +1,11 @@
 import { Request, Response } from 'express';
 
-import { UserModel } from 'app/users/application/models/user.model';
 import { UserRepository } from 'app/users/application/repository/user.repository';
 
 export class UserController {
     static async listUsers(_req: Request, res: Response) {
         try {
-            const data = await UserModel.find();
+            const data = await UserRepository.listUsers();
             res.json(data);
         } catch (error) {
             res.status(500).json({ error });
@@ -16,7 +15,7 @@ export class UserController {
     static async retrieveUserById(req: Request, res: Response) {
         try {
             const { userId } = req.params;
-            const data = await UserModel.findById(userId);
+            const data = await UserRepository.retrieveUserById(userId);
             res.json(data);
         } catch (error) {
             res.status(500).json({ error });
