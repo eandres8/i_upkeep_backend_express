@@ -26,4 +26,10 @@ export class DocumentRepository {
 
         return data.map<DocumentInterface>(document => new Document(document.toJSON() as any));
     }
+
+    static async retrieveDocumentByID(documentId: string) {
+        const data = await DocumentModel.findById( documentId );
+
+        return data?.toJSON();
+    }
 }

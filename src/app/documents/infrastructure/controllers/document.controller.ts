@@ -22,6 +22,16 @@ export class DocumentController {
         }
     }
 
+    static async retrieveDocumentById(req: Request, res: Response) {
+        try {
+            const { documentId } = req.params;
+            const data = await DocumentRepository.retrieveDocumentByID(documentId);
+            res.json(data);
+        } catch (error) {
+            res.status(500).json({ error });
+        }
+    }
+
     static async createDocument(req: Request, res: Response) {
         const { body } = req;
 
