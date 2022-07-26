@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 
 import { Vehicle } from '../../domain/models/vehicle';
-import { VehicleModel } from '../../application/models/vehicle.model';
+import { VehicleRepositoty } from 'app/vehicles/application/repository/vehicle.repository';
 
 export class VehicleController {
     static async listVehicles(_req: Request, res: Response) {
         try {
-            const vehicleList = await VehicleModel.find();
+            const vehicleList = await VehicleRepositoty.listVehicles();
             res.json(vehicleList);
         } catch (error) {
             res.status(500).json({ error });
@@ -16,7 +16,7 @@ export class VehicleController {
     static async retrieveVehiclesByUserId(req: Request, res: Response) {
         try {
             const { userId } = req.params;
-            const vehicleList = await VehicleModel.find({ userId });
+            const vehicleList = await VehicleRepositoty.retrieveVehiclesByUserID( userId );
             res.json(vehicleList);
         } catch (error) {
             res.status(500).json({ error });
@@ -27,17 +27,27 @@ export class VehicleController {
         const { body } = req;
 
         try {
-            const vehicle = new Vehicle(body);
-
-            const newVehicleModel = new VehicleModel(vehicle.toJsonModel());
-
-            const newVehicle = await newVehicleModel.save();
+            const newVehicle = await VehicleRepositoty.createVehicle(body);
             
             res.status(201).json(newVehicle);
 
         } catch (error) {
             res.status(500).json({ error });
         }
+    }
+
+    static async retrieveByVehicleID(req: Request, res: Response) {
+        const { vehicleId } = req.params;
+
+        try {
+            const vehicle = await VehicleRepositoty.retrieveByVehicleID(vehicleId);
+            
+            res.status(200).json(vehicle);
+
+        } catch (error) {
+            res.status(500).json({ error });
+        }
+
     }
 }
 

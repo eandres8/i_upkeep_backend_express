@@ -5,6 +5,7 @@ declare global {
         PORT: string;
         MONGODB_CNN: string;
         SECRET_KEY: string;
+        TIME_ZONE: string;
       }
     }
   }

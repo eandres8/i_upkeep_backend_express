@@ -4,6 +4,7 @@ import { Schema, model } from 'mongoose';
 import { VehicleState } from '../../domain/entities/vehicle_state.enum';
 import { MotorType } from '../../domain/entities/motor_type.enum';
 import { VehicleType } from '../../domain/entities/vehicle_type.enum';
+import { DateTimeAdapter } from 'core/interfaces/date_time.adapter';
 
 const VehicleSchema = new Schema({
     licensePlate: {
@@ -57,12 +58,12 @@ const VehicleSchema = new Schema({
     createdAt: {
         type: Date,
         required: true,
-        default: Date.now(),
+        default: DateTimeAdapter.now(),
     },
     updatedAt: {
         type: Date,
         required: true,
-        default: Date.now(),
+        default: DateTimeAdapter.now(),
     },
 });
 
