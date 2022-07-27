@@ -6,7 +6,7 @@ export const validateAuthToken = (req: Request, res: Response, next: any ) => {
     const token = req.header('Authorization');
     
     if (!token) {
-        return res.send(401).json("You must be authenticated");
+        return res.status(401).json("You must be authenticated");
     }
 
     try {
@@ -16,6 +16,6 @@ export const validateAuthToken = (req: Request, res: Response, next: any ) => {
 
         next();
     } catch (error) {
-        return res.send(401).json("Token no valid");
+        return res.status(401).json("Token no valid");
     }
 };
