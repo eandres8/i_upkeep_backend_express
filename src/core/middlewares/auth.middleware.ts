@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { JWTAdapter } from 'core/interfaces/jwt.adapter';
+import { JWTAdapter } from 'core/adapters/jwt.adapter';
 
 export const validateAuthToken = (req: Request, res: Response, next: any ) => {
     const token = req.header('Authorization');

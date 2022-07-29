@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 
 import { DocumentState } from 'app/documents/domain/entities/document_state.enum';
 import { DocumentsType } from 'app/documents/domain/entities/documents_type.enum';
-import { DateTimeAdapter } from 'core/interfaces/date_time.adapter';
+import { DateTimeAdapter } from 'core/adapters/date_time.adapter';
 
 const DocumentSchema = new Schema({
     vehicleId: {

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-import { DBConnectionAdapter } from '../interfaces/db_connection.adapter';
+import { DBConnectionAdapter } from '../adapters/db_connection.adapter';
 
 export class MongoConnect implements DBConnectionAdapter {
     constructor(

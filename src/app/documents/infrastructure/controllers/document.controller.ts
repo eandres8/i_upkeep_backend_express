@@ -3,9 +3,10 @@ import { Request, Response } from 'express';
 import { DocumentRepository } from 'app/documents/application/repository/document.repository';
 
 export class DocumentController {
-    static async listDocuments(_req: Request, res: Response) {
+    static async listDocuments(req: Request, res: Response) {
         try {
-            const data = await DocumentRepository.listDocuments();
+            const { num = 10, page = 0 } = req.query;
+            const data = await DocumentRepository.listDocuments({ limit: +num, skip: +page });
             res.json(data);
         } catch (error) {
             res.status(500).json({ error });

@@ -3,9 +3,10 @@ import { Request, Response } from 'express';
 import { UserRepository } from 'app/users/application/repository/user.repository';
 
 export class UserController {
-    static async listUsers(_req: Request, res: Response) {
+    static async listUsers(req: Request, res: Response) {
         try {
-            const data = await UserRepository.listUsers();
+            const { num = 10, page = 0 } = req.query;
+            const data = await UserRepository.listUsers({ limit: +num, skip: +page });
             res.json(data);
         } catch (error) {
             res.status(500).json({ error });

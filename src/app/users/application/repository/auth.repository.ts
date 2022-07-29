@@ -1,6 +1,6 @@
 import { UserModel } from '../models/user.model';
-import { JWTAdapter } from 'core/interfaces/jwt.adapter';
-import { CryptAdapter } from 'core/interfaces/crypt.adapter';
+import { JWTAdapter } from 'core/adapters/jwt.adapter';
+import { CryptAdapter } from 'core/adapters/crypt.adapter';
 import { User } from 'app/users/domain/models/user';
 
 export class AuthRepository {

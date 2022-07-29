@@ -3,7 +3,7 @@ import { DateTime } from 'luxon';
 import { DocumentInterface, DocumentModelInterface } from 'app/documents/domain/entities/document.interface';
 import { DocumentState } from 'app/documents/domain/entities/document_state.enum';
 import { DocumentsType } from 'app/documents/domain/entities/documents_type.enum';
-import { DateTimeAdapter } from 'core/interfaces/date_time.adapter';
+import { DateTimeAdapter } from 'core/adapters/date_time.adapter';
 
 export class Document {
     public readonly id: string;

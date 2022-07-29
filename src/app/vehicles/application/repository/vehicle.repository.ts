@@ -2,6 +2,7 @@ import { VehicleInterface } from 'app/vehicles/domain/entities/vehicle.interface
 import { Vehicle } from 'app/vehicles/domain/models/vehicle';
 import { VehicleModel } from '../models/vehicle.model';
 import { UserModel } from 'app/users/application/models/user.model';
+import { Pagination } from 'core/interfaces/pagination.interface';
 
 export class VehicleRepositoty {
 
@@ -23,8 +24,8 @@ export class VehicleRepositoty {
         return newVehicle.toJSON();
     }
 
-    static async listVehicles(): Promise<VehicleInterface[]> {
-        const data = await VehicleModel.find();
+    static async listVehicles({ limit, skip }: Pagination): Promise<VehicleInterface[]> {
+        const data = await VehicleModel.find().skip(skip).limit(limit);
 
         return data.map<VehicleInterface>(vehicle => new Vehicle(vehicle.toJSON() as any));
     }

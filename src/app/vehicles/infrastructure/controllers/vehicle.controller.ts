@@ -4,9 +4,10 @@ import { Vehicle } from '../../domain/models/vehicle';
 import { VehicleRepositoty } from 'app/vehicles/application/repository/vehicle.repository';
 
 export class VehicleController {
-    static async listVehicles(_req: Request, res: Response) {
+    static async listVehicles(req: Request, res: Response) {
         try {
-            const vehicleList = await VehicleRepositoty.listVehicles();
+            const { num = 10, page = 0 } = req.query;
+            const vehicleList = await VehicleRepositoty.listVehicles({ limit: +num, skip: +page });
             res.json(vehicleList);
         } catch (error) {
             res.status(500).json({ error });

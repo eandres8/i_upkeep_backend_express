@@ -1,7 +1,8 @@
 import { UserModel } from 'app/users/application/models/user.model';
 import { UserInterface } from 'app/users/domain/entities/user.interface';
 import { User } from 'app/users/domain/models/user';
-import { CryptAdapter } from 'core/interfaces/crypt.adapter';
+import { CryptAdapter } from 'core/adapters/crypt.adapter';
+import { Pagination } from 'core/interfaces/pagination.interface';
 
 export class UserRepository {
 
@@ -17,8 +18,8 @@ export class UserRepository {
         return newUser.toJSON();
     }
 
-    static async listUsers(): Promise<UserInterface[]> {
-        const data = await UserModel.find();
+    static async listUsers({ limit, skip }: Pagination): Promise<UserInterface[]> {
+        const data = await UserModel.find().skip(skip).limit(limit);
 
         return data.map<UserInterface>(user => new User(user.toJSON() as any));
     }
