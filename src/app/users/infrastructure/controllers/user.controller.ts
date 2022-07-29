@@ -8,8 +8,8 @@ export class UserController {
             const { num = 10, page = 0 } = req.query;
             const data = await UserRepository.listUsers({ limit: +num, skip: +page });
             res.json(data);
-        } catch (error) {
-            res.status(500).json({ error });
+        } catch (error: any) {
+            res.status(400).json(error.message);
         }
     }
 
@@ -18,8 +18,8 @@ export class UserController {
             const { userId } = req.params;
             const data = await UserRepository.retrieveUserById(userId);
             res.json(data);
-        } catch (error) {
-            res.status(500).json({ error });
+        } catch (error: any) {
+            res.status(400).json(error.message);
         }
     }
 
@@ -31,8 +31,22 @@ export class UserController {
             
             res.status(201).json(newUser);
 
-        } catch (error) {
-            res.status(500).json({ error });
+        } catch (error: any) {
+            res.status(400).json(error.message);
+        }
+    }
+
+    static async updateUser(req: Request, res: Response) {
+        const { body } = req;
+        const { userId } = req.params;
+
+        try {
+            const newDataUser = await UserRepository.updateUser(userId, body);
+            
+            res.status(200).json(newDataUser);
+
+        } catch (error: any) {
+            res.status(400).json(error.message);
         }
     }
 }

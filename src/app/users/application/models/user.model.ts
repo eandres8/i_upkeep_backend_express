@@ -4,6 +4,7 @@ import { UserGender } from '../../domain/entities/user_gender.enum';
 import { UserRole } from '../../domain/entities/user_role.enum';
 import { UserState } from '../../domain/entities/user_state.enum';
 import { UserDocumentType } from 'app/users/domain/entities/user_document_type.enum';
+import { DateTimeAdapter } from 'core/adapters/date_time.adapter';
 
 const UserSchema = new Schema({
     firstName: {
@@ -41,7 +42,7 @@ const UserSchema = new Schema({
         enum: [UserRole.USER, UserRole.SUPER_USER, UserRole.DEVELOPER],
     },
     birthdate: {
-        type: String,
+        type: Date,
     },
     picture: {
         type: String,
@@ -55,12 +56,12 @@ const UserSchema = new Schema({
     createdAt: {
         type: Date,
         required: true,
-        default: Date.now(),
+        default: DateTimeAdapter.now(),
     },
     updatedAt: {
         type: Date,
         required: true,
-        default: Date.now(),
+        default: DateTimeAdapter.now(),
     },
 });
 

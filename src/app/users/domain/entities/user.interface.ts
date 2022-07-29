@@ -22,4 +22,4 @@ export interface UserInterface {
 
 export type UserJsonInterface = Omit<UserInterface, 'password'>;
 
-export type UserModelInterface = Omit<UserInterface, 'id' | 'createdAt' | 'updatedAt'>;
+export type UserModelInterface = Omit<UserInterface, 'id'>;

@@ -3,6 +3,7 @@ import { UserGender } from 'app/users/domain/entities/user_gender.enum';
 import { UserRole } from 'app/users/domain/entities/user_role.enum';
 import { UserState } from 'app/users/domain/entities/user_state.enum';
 import { UserDocumentType } from 'app/users/domain/entities/user_document_type.enum';
+import { DateTimeAdapter } from 'core/adapters/date_time.adapter';
 
 export class User {
     public readonly id: string;
@@ -29,12 +30,12 @@ export class User {
         this.documentType = user.documentType;
         this.document = user.document;
         this.gender = user.gender;
-        this.birthdate = user.birthdate;
+        this.birthdate = new Date(user.birthdate!);
         this.picture = user.picture;
         this.role = user.role;
         this.state = user.state;
-        this.createdAt = user.createdAt;
-        this.updatedAt = user.updatedAt;
+        this.createdAt = user.createdAt ? new Date(user.createdAt) : null;
+        this.updatedAt = user.updatedAt ? new Date(user.updatedAt) : null;
     }
 
     public copyWith(partial: Partial<UserInterface>): User {
@@ -87,6 +88,8 @@ export class User {
             picture: this.picture,
             role: this.role,
             state: this.state,
+            createdAt: this.createdAt,
+            updatedAt: this.updatedAt,
         };
     }
 
@@ -104,8 +107,8 @@ export class User {
             picture: '',
             role: UserRole.USER,
             state: UserState.ACTIVE,
-            createdAt: null,
-            updatedAt: null,
+            createdAt: DateTimeAdapter.now().toJSDate(),
+            updatedAt: DateTimeAdapter.now().toJSDate(),
         });
     }
 }

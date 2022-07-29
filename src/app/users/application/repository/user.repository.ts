@@ -30,4 +30,17 @@ export class UserRepository {
         return data?.toJSON();
     }
 
+    static async updateUser(userId: string, userData: UserInterface) {
+        const userDataExist = await UserModel.findById(userId);
+
+        if(!userDataExist?.id) {
+            throw new Error(`The user ${userId} doesn't exist!`);
+        }
+
+        const newDataUser = new User(userDataExist.toJSON()).copyWith({ ...userData, updatedAt: new Date(Date.now()) }).toJsonModel();
+
+        await UserModel.findByIdAndUpdate(userId, newDataUser);
+
+        return newDataUser;
+    }
 }
