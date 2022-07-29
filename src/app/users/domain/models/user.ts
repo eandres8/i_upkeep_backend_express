@@ -1,7 +1,8 @@
-import { UserInterface, UserModelInterface } from 'app/users/domain/entities/user.interface';
+import { UserInterface, UserJsonInterface, UserModelInterface } from 'app/users/domain/entities/user.interface';
 import { UserGender } from 'app/users/domain/entities/user_gender.enum';
 import { UserRole } from 'app/users/domain/entities/user_role.enum';
 import { UserState } from 'app/users/domain/entities/user_state.enum';
+import { UserDocumentType } from 'app/users/domain/entities/user_document_type.enum';
 
 export class User {
     public readonly id: string;
@@ -9,6 +10,8 @@ export class User {
     public readonly lastName: string;
     public readonly email: string;
     public readonly password: string;
+    public readonly documentType: UserDocumentType;
+    public readonly document: string;
     public readonly gender: UserGender;
     public readonly birthdate: Date | null;
     public readonly picture: string;
@@ -23,6 +26,8 @@ export class User {
         this.lastName = user.lastName;
         this.email = user.email;
         this.password = user.password;
+        this.documentType = user.documentType;
+        this.document = user.document;
         this.gender = user.gender;
         this.birthdate = user.birthdate;
         this.picture = user.picture;
@@ -39,6 +44,8 @@ export class User {
             lastName: partial.lastName || this.lastName,
             email: partial.email || this.email,
             password: partial.password || this.password,
+            documentType: partial.documentType || this.documentType,
+            document: partial.document || this.document,
             gender: partial.gender || this.gender,
             birthdate: partial.birthdate || this.birthdate,
             picture: partial.picture || this.picture,
@@ -49,13 +56,14 @@ export class User {
         });
     }
 
-    public toJson(): UserInterface {
+    public toJson(): UserJsonInterface {
         return {
             id: this.id,
             firstName: this.firstName,
             lastName: this.lastName,
             email: this.email,
-            password: this.password,
+            documentType: this.documentType,
+            document: this.document,
             gender: this.gender,
             birthdate: this.birthdate,
             picture: this.picture,
@@ -72,6 +80,8 @@ export class User {
             lastName: this.lastName,
             email: this.email,
             password: this.password,
+            documentType: this.documentType,
+            document: this.document,
             gender: this.gender,
             birthdate: this.birthdate,
             picture: this.picture,
@@ -87,6 +97,8 @@ export class User {
             lastName: '',
             email: '',
             password: '',
+            documentType: UserDocumentType.CC,
+            document: '',
             gender: UserGender.MALE,
             birthdate: null,
             picture: '',

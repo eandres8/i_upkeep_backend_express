@@ -10,9 +10,11 @@
 - set default values to return, when search on db dont have data
 - add set validation on Class
     [ ] set validate datetime (document)
-    [ ] set password (user)
 - endpoints to register and login user
     [x] login return JWT
-    [ ] register return JWT
+    [x] register return JWT
+    [x] forgot password
 [x] add JWT validations
 - upload files
+
+- start over

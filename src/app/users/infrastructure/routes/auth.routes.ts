@@ -13,4 +13,5 @@ export enum UserRoutes {
 }
 
 authRouteList
-    .post(UserRoutes.LOGIN, AuthController.login);
+    .post(UserRoutes.LOGIN, AuthController.login)
+    .post(UserRoutes.REGISTER, AuthController.register);

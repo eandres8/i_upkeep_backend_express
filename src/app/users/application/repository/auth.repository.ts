@@ -1,6 +1,7 @@
 import { UserModel } from '../models/user.model';
 import { JWTAdapter } from 'core/interfaces/jwt.adapter';
 import { CryptAdapter } from 'core/interfaces/crypt.adapter';
+import { User } from 'app/users/domain/models/user';
 
 export class AuthRepository {
     static async doLogin(username: string, password: string) {
@@ -16,7 +17,19 @@ export class AuthRepository {
 
         const token = JWTAdapter.generateJWT({ uid: user._id, role: user.role });
 
-        // TODO: return JWT
         return token;
+    }
+
+    static async doRegister(user: User) {
+
+        const password = CryptAdapter.doCrypt(user.password);
+
+        const newUserModel = new UserModel(user.copyWith({ password }).toJsonModel());
+
+        const newUser = await newUserModel.save();
+        
+        const token = JWTAdapter.generateJWT({ uid: newUser._id, role: user.role });
+
+        return { token , user: newUser.toJSON() };
     }
 }

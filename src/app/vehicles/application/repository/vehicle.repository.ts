@@ -1,6 +1,7 @@
 import { VehicleInterface } from 'app/vehicles/domain/entities/vehicle.interface';
 import { Vehicle } from 'app/vehicles/domain/models/vehicle';
 import { VehicleModel } from '../models/vehicle.model';
+import { UserModel } from 'app/users/application/models/user.model';
 
 export class VehicleRepositoty {
 
@@ -9,6 +10,11 @@ export class VehicleRepositoty {
         const vehicle = new Vehicle(body);
 
         // TODO: validate if userID exist
+        const user = await UserModel.findById(vehicle.userId);
+
+        if (!user) {
+            throw new Error('The user doesn`t exist');
+        }
 
         const newVehicleModel = new VehicleModel(vehicle.toJsonModel());
 

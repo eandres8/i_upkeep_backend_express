@@ -1,9 +1,9 @@
-
 import { Schema, model } from 'mongoose';
 
 import { UserGender } from '../../domain/entities/user_gender.enum';
 import { UserRole } from '../../domain/entities/user_role.enum';
 import { UserState } from '../../domain/entities/user_state.enum';
+import { UserDocumentType } from 'app/users/domain/entities/user_document_type.enum';
 
 const UserSchema = new Schema({
     firstName: {
@@ -23,6 +23,15 @@ const UserSchema = new Schema({
         type: String,
         required: [true, 'The model is required'],
     },
+    documentType: {
+        type: String,
+        enum: [UserDocumentType.CC, UserDocumentType.CE, UserDocumentType.DI],
+        required: [true, 'The document type is required'],
+    },
+    document: {
+        type: String,
+        required: [true, 'The identifier document is required'],
+    },
     gender: {
         type: String,
         enum: [UserGender.MALE, UserGender.FAMALE],
@@ -33,7 +42,6 @@ const UserSchema = new Schema({
     },
     birthdate: {
         type: String,
-        required: true,
     },
     picture: {
         type: String,
